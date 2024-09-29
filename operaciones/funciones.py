@@ -15,7 +15,7 @@ def inicio():
      De el lado izquierdo tienes el menú, dale click para conocer el catalogo.
      """
 
-    left_co, cent_co,last_co = st.columns(3)
+    left_co, cent_co,last_co = st.columns(3) #Da el formato a la imagen 
     with cent_co:
         st.image(logo_ici)
     st.markdown("<h1 style='text-align: center; color: white;'>Tablero Interactivo ICI</h1>", unsafe_allow_html=True)
@@ -27,14 +27,14 @@ def inicio():
 def saludo_simple():
     st.markdown("## Saludo simple")
     nombre = st.text_input("Escribe tu nombre:")
-    if st.button("Saludar"):
+    if st.button("Saludar"): # Al pulsar Saludar escribe el f-string
         st.write(f"¡Hola, {nombre}!")
 
 def suma_dos_numeros():
     st.markdown("## Suma de dos números")
-    num1 = st.number_input("Introduce el primer número:", step=1.0)
+    num1 = st.number_input("Introduce el primer número:", step=1.0) # number_imput sirve para capturar valores númericos y step es el incremento en este caso será de 1 en 1.
     num2 = st.number_input("Introduce el segundo número:", step=1.0)
-    if st.button("Sumar"):
+    if st.button("Sumar"): # sumalas 2 entradas y despliega el f-string
         resultado = num1 + num2
         st.write(f"La suma es: {resultado}")
 
@@ -51,7 +51,7 @@ def calculadora_descuento():
     precio = st.number_input("Introduce el precio original:", step=1.0)
     
     descuento = st.number_input("Introduce el porcentaje de descuento (opcional, por defecto 10%):", value=10, step=1) #Necesitan ser del mismo tipo si no da error de tipo.
-    impuesto = st.number_input("Introduce el porcentaje de impuesto (opcional, por defecto 16%):", value=16, step=1)
+    impuesto = st.number_input("Introduce el porcentaje de impuesto (opcional, por defecto 16%):", value=16, step=1) #Value ayuda a inicializar la entrada con un valor preterminado.
     
     if st.button("Calcular precio final"):
         precio_descuento = precio - (precio * descuento / 100) # El descuento es del 10% sobre el precio original
@@ -68,8 +68,8 @@ def suma_lista_numeros():
 
 def funciones_valores_predeterminados():
     st.markdown("## Funciones con valores predeterminados")
-    def producto(nombre, cantidad=1, precio=10):
-        return f"Total por {cantidad} unidad(es) de {nombre}: {cantidad * precio}"
+    def producto(nombre, cantidad=1, precio=10):  # Se cargan los valores
+        return f"Total por {cantidad} unidad(es) de {nombre}: {cantidad * precio}" # Retornamos el f-string con los valores.
     
     nombre = st.text_input("Introduce el nombre del producto:")
     cantidad = st.number_input("Cantidad (por defecto 1):", value=1, step=1)
@@ -93,14 +93,14 @@ def multi_args():
     lista_numeros = st.text_input("Introduce una lista de números separados por comas para multiplicar:")
     if st.button("Multiplicar"):
         if lista_numeros:  # Verifica si la lista no está vacía
-            try:
-                numeros = [float(n) for n in lista_numeros.split(",")]
+            try: # Lo hacemos por bloques para manejar las excepciónes 
+                numeros = [float(n) for n in lista_numeros.split(",")] #split separa los números donde hay comas 
                 def multiplicar(*args):
                     resultado = 1
-                    for num in args:
+                    for num in args: # Multiplicamos los números ingresados 
                         resultado *= num
                     return resultado
-                resultado = multiplicar(*numeros)
+                resultado = multiplicar(*numeros) # Llamamos la funcion y la cargamos con todos los valores ingresados 
                 st.write(f"El resultado de la multiplicación es: {resultado}")
             except ValueError:
                 st.error("Por favor, introduce una lista válida de números separados por comas.")
@@ -111,7 +111,7 @@ def multi_args():
 def info_persona_kwargs():
     st.markdown("## Información de una persona con **kwargs")
     nombre = st.text_input("Nombre:")
-    edad = st.number_input("Edad:", step=1, format="%d")  # Asegúrate de que sea un número entero
+    edad = st.number_input("Edad:", step=1, format="%d")  # Asegúramos de que sea un número entero
     ciudad = st.text_input("Ciudad:")
     
     if st.button("Mostrar información"):
@@ -125,18 +125,18 @@ def info_persona_kwargs():
 
 def calculadora_flexible():
     st.markdown("## Calculadora flexible")
-    num1 = st.number_input("Introduce el primer número para la operación:", step=1.0)
+    num1 = st.number_input("Introduce el primer número para la operación:", step=1.0) 
     num2 = st.number_input("Introduce el segundo número para la operación:", step=1.0)
-    operacion = st.selectbox("Elige una operación", ["Suma", "Resta", "Multiplicación", "División"])
+    operacion = st.selectbox("Elige una operación", ["Suma", "Resta", "Multiplicación", "División"]) #Muestra el menú de las operaciones.
     if st.button("Calcular"):
-        if operacion == "Suma":
+        if operacion == "Suma": # Condicionales que se ejecutan dependiendo la opcion seleccionada. 
             resultado = num1 + num2
         elif operacion == "Resta":
             resultado = num1 - num2
         elif operacion == "Multiplicación":
             resultado = num1 * num2
         elif operacion == "División":
-            if num2 != 0:
+            if num2 != 0: #Evita la división entre 0
                 resultado = num1 / num2
             else:
                 resultado = "No se puede dividir entre 0"
@@ -145,9 +145,10 @@ def calculadora_flexible():
         
 def info_conctacto():
     st.title(":blue[Acerca de mi] :sunglasses:")
-    
+    # Implemente un poco de html para poder darle un mejor formato al texto.
+    #<ul> = unordered List (lista desordenada) <li>= list item (elementos de la lista)
     st.markdown("""
-    <p>Hola, mi nombre es <strong>Juan Pablo</strong>, soy estudiante de la carrera Ingenieria en Computacion Inteligente.
+    <p>Hola, mi nombre es <strong>Juan Pablo</strong>, soy estudiante de la carrera Ingenieria en Computacion Inteligente. 
     En mi corta trayectoria he aprendido las bases de diversos lenguajes de programacion como c ,java ,python, etc.. 
     Tengo experiencia en el desarrollo de aplicaciones web utilizando Python y Streamlit, y disfruto 
     creando soluciones que simplifiquen las tareas de los usuarios.
