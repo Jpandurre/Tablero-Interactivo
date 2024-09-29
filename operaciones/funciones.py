@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def inicio():
-    logo_ici='C:/Users/Colibecas/OneDrive/Pictures/Imagenes/ici.png'
+    logo_ici='ici.png'
     introduccion= """
      Este programa ofrece una variedad de herramientas interactivas para simplificar 
      tareas comunes. Podrás realizar cálculos como sumar números, obtener el área de un 
